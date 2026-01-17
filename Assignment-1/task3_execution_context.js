@@ -28,7 +28,7 @@
  * 
  * Execution Context internal working
  * 
- * A. creation phase -> allocates variable , function decalration , scope, TDZ setup (Temporal Dead Zone)
+ * A. creation phase (Memory Component / Variable Environment) -> allocates variable , function decalration , scope, TDZ setup (Temporal Dead Zone)
  * 
  * TDZ -> a period of time when 'let' and 'const' decalred but value not assigned to them and can't access them.
  * 
@@ -65,7 +65,7 @@
  * 
  * this binding ->  refer to current objects 
  * 
- * B. Execution phase -> Js run code one by one
+ * B. Execution phase(Thread of Execution/ Code Component)   -> Js run code one by one
  * 
  * setup :
  * 
