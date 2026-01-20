@@ -1,6 +1,6 @@
 // this === window ---> this refers to current window object
 
-var x = 10; // Global memory console
+/* var x = 10; // Global memory console
 {
     var x = 11; // local memory console
     console.log(this.x);
@@ -8,7 +8,7 @@ var x = 10; // Global memory console
 console.log(this.x);
 
 
-console.log(global === this);
+console.log(global === this); */
 
 
 /*
@@ -32,3 +32,31 @@ Because module wrapper:
 (function (exports, require, module, __filename, __dirname) { ... })
 
 */
+
+
+const user = {
+    name: "Hansil",
+    email: "@gmail.com",
+    settings: {
+        theme: "light"
+    },
+
+    pritnInfo: function () {
+        const pritnInfo2 = () => {
+            console.log(this.name);
+            console.log(this.settings.theme);
+        }
+        // console.log(this.name);
+        // console.log(this.settings.theme);
+        pritnInfo2();
+    },
+
+    // pritnInfo2: () => {
+
+    // }
+}
+
+const user2 = { ...user, name: "Admin" }
+
+user.pritnInfo();
+// user2.pritnInfo();
