@@ -9,6 +9,7 @@ class Counter {
   }
 
   // Getter method for instance 
+  // Get instance variable
   getCount() {
     return this.count;
   }
