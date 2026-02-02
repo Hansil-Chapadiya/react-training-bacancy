@@ -1,4 +1,3 @@
-
 // Creating masterClone method
 // its takes obj as parameter
 function masterClone(obj){
@@ -51,4 +50,4 @@ const obj = {
 console.log(masterClone(obj));
 
 // Check whether both  are same or not
-console.log(masterClone(obj) === obj)
+console.log(masterClone(obj) === obj);
