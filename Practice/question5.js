@@ -9,54 +9,124 @@ const logs = [
     { user: "C", action: "logout", time: 9 }
 ];
 
+/*
+result array = [
+    user : username
+    sessiontime : logout- login
+    clicktime : actiontime
+]
+*/
 
-const arr = logs.reduce((acc, obj) => {
+// const answer = logs.reduce((acc, obj) => {
 
-    const userobj = acc.reduce((ac, oj) => {
+//     let finduser = acc.find(x => x.user == obj.user);
 
-        if (oj.user == obj.user) {
-            ac.push({ ...oj })
+//     if (finduser) {
+
+//         if (obj.action === 'click'){
+//             finduser.actiontime += obj.time;
+//         } 
+//         else if (obj.action === 'login'){
+//             finduser.sessiontime += obj.time; 
+//         }else{
+//             finduser.sessiontime = obj.time - finduser.sessiontime;
+//         }
+
+//     } else {
+
+//         acc.push({
+//             user: obj.user,
+//             sessiontime: obj.action === 'login' ? obj.time : 0,
+//             actiontime: obj.action === 'click' ? obj.time : 0
+//         })
+
+//     }
+
+//     return acc;
+
+// }, []);
+
+
+const answer = logs.reduce((acc, obj) => {
+
+    let finduser = acc.get(obj.user);
+
+    if (finduser) {
+
+        if (obj.action === 'click'){
+            finduser.actiontime += obj.time;
+        } 
+        else if (obj.action === 'login'){
+            finduser.sessiontime += obj.time; 
+        }else{
+            finduser.sessiontime = obj.time - finduser.sessiontime;
         }
 
-        return ac;
-    }, [])
+    } else {
 
-    console.log(userobj);
-    let logintime = obj.time;
-    let clicktime = 0;
-    let logouttime = 0;
-
-    if (userobj.length > 0) {
-
-        if (userobj.action == 'login') {
-            logintime += userobj.time;
-        }
-
-        if (userobj.action == 'click') {
-            clicktime += userobj.time;
-        }
-
-        if (userobj.action == 'logout') {
-            logouttime += userobj.time;
-        }
-
-        // acc[userobj.sessiontime] = userobj.action==login - userobj.logout;
-        acc.push({
+        acc.set(obj.user, {
             user: obj.user,
-            sessiontime: logouttime - logintime,
-            actiontime: clicktime
+            sessiontime: obj.action === 'login' ? obj.time : 0,
+            actiontime: obj.action === 'click' ? obj.time : 0
         })
-    }
-    else{
-        acc.push({
-            user: obj.user,
-            login : logintime,
-            logout : logouttime,
-            action : clicktime
-        })
-    }
-    return acc
 
-}, [])
+    }
+
+    return acc;
+
+}, new Map());
+
+console.log([...answer.values()]);
+
+
+
+// const arr = logs.reduce((acc, obj) => {
+
+//     const userobj = acc.reduce((ac, oj) => {
+
+//         if (oj.user == obj.user) {
+//             ac.push({ ...oj })
+//         }
+
+//         return ac;
+//     }, [])
+
+//     console.log(userobj);
+//     let logintime = obj.time;
+//     let clicktime = 0;
+//     let logouttime = 0;
+
+//     if (userobj.length > 0) {
+
+//         if (userobj.action == 'login') {
+//             logintime += userobj.time;
+//         }
+
+//         if (userobj.action == 'click') {
+//             clicktime += userobj.time;
+//         }
+
+//         if (userobj.action == 'logout') {
+//             logouttime += userobj.time;
+//         }
+
+//         // acc[userobj.sessiontime] = userobj.action==login - userobj.logout;
+//         acc.push({
+//             user: obj.user,
+//             sessiontime: logouttime - logintime,
+//             actiontime: clicktime
+//         })
+//     }
+//     else{
+//         acc.push({
+//             user: obj.user,
+//             login : logintime,
+//             logout : logouttime,
+//             action : clicktime
+//         })
+//     }
+//     return acc
+
+// }, [])
 
 // console.log(arr);
