@@ -5,10 +5,10 @@
 */
 
 // Declaration
-let array = [3,7,3,[8,9],6]
+const array = [3,7,3,[8,9],6]
 
 // Resultant Array
-let newarray = array.reduce((acc, curr) => {
+const newarray = array.reduce((acc, curr) => {
 
     // Check Whether curr = SubArray 
     if(Array.isArray(curr)){
