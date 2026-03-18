@@ -7,12 +7,22 @@ import type { EventParams } from './types/form.types';
 function App() {
 
   const [inputs, setInputs] = useState(structuredClone(Inputs));
+  const [flag, setFlag] = useState({
+    email: false,
+    text: false,
+    select: false,
+    radio: false,
+    checkbox: false,
+  });
 
   const onInputBlur = ({ id, value, checked }: EventParams) => {
     const oldState = structuredClone(inputs);
     const field = oldState[id];
 
+    setFlag(prev => ({ ...prev, [field.type]: true }))
+
     if (field.type === "email") {
+
       const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       field.error = emailRegex.test(field.value)
@@ -53,7 +63,35 @@ function App() {
       field.value = value;
     }
 
-    field.error = "";
+    if (field.type === "email" && flag.email) {
+      const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      field.error = emailRegex.test(field.value)
+        ? ""
+        : "Email is not valid (e.g. a@example.com)";
+    }
+
+    if (field.type === "text" && flag.text) {
+      if (value.length < 3) {
+        field.error = `Invalid field ${field.label} Required more than 3 Characters`;
+      } else if (value.length > 15) {
+        field.error = `Invalid field ${field.label} Required Less than 15 Characters`;
+      } else {
+        field.error = "";
+      }
+    }
+
+    if ((field.type === "dropdown" && flag.select) || (field.type === "radio" && flag.radio)) {
+      field.error = value ? "" : `Please Select Value ${field.label}`;
+    }
+
+    if (field.type === "checkbox" && flag.checkbox) {
+      field.error = checked ? "" : `Required ${field.label}`;
+    }
+
+
+
+    // field.error = "";
     setInputs(oldState);
 
   }
