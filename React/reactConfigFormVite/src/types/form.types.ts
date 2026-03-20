@@ -38,16 +38,17 @@ export type CheckboxField = BaseField & {
 }
 
 export type EventParams = {
-  id: number,
-  value: string,
-  checked?: boolean,
+    id: number,
+    value: string,
+    checked?: boolean,
 }
 
 export type BaseInputProps = {
-  id: number
-  onChange: (params: EventParams) => void
-  onBlur: (params: EventParams) => void
+    id: number
+    onChange: (params: EventParams) => void
+    onBlur: (params: EventParams) => void
 }
+
 
 export type InputField =
     | TextField
@@ -55,3 +56,24 @@ export type InputField =
     | RadioField
     | CheckboxField
 
+
+type CatogoryKey = "personal_details" | "location" | "terms"
+
+export type CategoriesType = {
+    [K in CatogoryKey]: {
+        name: string,
+        inputs: InputField[]
+    }
+}
+
+
+/*
+
+export type CategoriesType = {
+  [key: string]: {
+    name: string;
+    inputs: InputField[];
+  };
+};
+
+*/

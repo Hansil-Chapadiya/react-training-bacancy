@@ -12,15 +12,16 @@ const RadioField = ({
     type,
     options,
     error,
+    categorykey,
     ...input
 }: Props) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange({ id, value: event.target.value })
+        onChange({ id, value: event.target.value,categorykey })
     }
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        onBlur({ id, value: event.target.value })
+        onBlur({ id, value: event.target.value, categorykey })
     }
 
     return (

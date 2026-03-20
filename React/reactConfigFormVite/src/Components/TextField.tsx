@@ -11,15 +11,16 @@ const TextField = ({
     value,
     type,
     error,
+    categorykey,
     ...input
 }: Props) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        onChange({ id, value: event.target.value });
+        onChange({ id, value: event.target.value, categorykey });
     }
 
     const handleBlur = (event: React.FocusEvent<HTMLInputElement>): void => {
-        onBlur({ id, value: event.target.value })
+        onBlur({ id, value: event.target.value, categorykey })
     }
 
     return (

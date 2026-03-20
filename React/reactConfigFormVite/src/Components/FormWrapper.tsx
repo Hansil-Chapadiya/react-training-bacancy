@@ -24,27 +24,37 @@ const FormWrapper = ({ inputs, onInputChange, onHandleSubmit, onHandleCancel, di
 
     return (
         <form className="app" onSubmit={handleSubmit}>
-            {inputs.map((input, index) => {
-                if (input.type === "checkbox") {
+            {
+                Object.keys(inputs).map((key) => {
+                    const data = inputs[key];
                     return (
-                        <CheckBox key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
-                    )
-                }
+                        <fieldset key={`category-${key}`}>
+                            <legend>{data.name}</legend>
+                            {data.inputs.map((input: InputField, index: number) => {
+                                if (input.type === 'checkbox') {
+                                    return (
+                                        <CheckBox categorykey={key} key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
+                                    )
+                                }
+                                if (input.type === "radio") {
+                                    return (
+                                        <RadioField categorykey={key} key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
+                                    )
+                                }
 
-                if (input.type === "radio") {
-                    return (
-                        <RadioField key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
-                    )
-                }
+                                if (input.type === "dropdown") {
+                                    return (
+                                        <DropDownField categorykey={key} key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
+                                    )
+                                }
 
-                if (input.type === "dropdown") {
-                    return (
-                        <DropDownField key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
+                                return <TextField categorykey={key} key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
+                            })}
+                        </fieldset>
                     )
-                }
+                })
 
-                return <TextField key={index} id={index} onChange={onInputChange} onBlur={onInputBlur} {...input} />
-            })}
+            }
 
             <div>
                 <br />

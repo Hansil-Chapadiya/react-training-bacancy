@@ -11,15 +11,16 @@ const CheckBox = ({
     value,
     type,
     error,
+    categorykey,
     ...input
 }: Props) => {
 
     const handleChange = () => {
-        onChange({ id, value, checked: !checked })
+        onChange({ id, value, checked: !checked, categorykey})
     }
 
     const handleBlur = () => {
-        onBlur({ id, value, checked })
+        onBlur({ id, value, checked, categorykey })
     }
 
     return (

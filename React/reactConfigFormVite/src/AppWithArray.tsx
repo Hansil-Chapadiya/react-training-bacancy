@@ -1,20 +1,12 @@
 import { useState } from 'react'
 import './App.css'
-import { Categories } from './inputConfigCategory';
+import { Inputs } from './inputConfig'
 import FormWrapper from './Components/FormWrapper';
-// import type { EventParams } from './types/form.types';
-
-export type EventParams = {
-  id: number,
-  value: string,
-  checked?: boolean,
-  categorykey: string
-}
-
+import type { EventParams } from './types/form.types';
 
 function App() {
 
-  const [inputs, setInputs] = useState(structuredClone(Categories));
+  const [inputs, setInputs] = useState(structuredClone(Inputs));
   const [flag, setFlag] = useState({
     email: false,
     text: false,
@@ -23,9 +15,9 @@ function App() {
     checkbox: false,
   });
 
-  const onInputBlur = ({ id, value, checked, categorykey }: EventParams) => {
+  const onInputBlur = ({ id, value, checked }: EventParams) => {
     const oldState = structuredClone(inputs);
-    const field = oldState[categorykey].inputs[id];
+    const field = oldState[id];
 
     setFlag(prev => ({ ...prev, [field.type]: true }))
 
@@ -59,10 +51,10 @@ function App() {
     setInputs(oldState);
   }
 
-  const onInputChange = ({ id, value, checked, categorykey }: EventParams) => {
+  const onInputChange = ({ id, value, checked }: EventParams) => {
 
     const oldState = structuredClone(inputs);
-    const field = oldState[categorykey].inputs[id];
+    const field = oldState[id];
 
     if (field.type === "checkbox") {
       field.checked = !!checked;
@@ -111,43 +103,37 @@ function App() {
   const onHandleSubmit = () => {
     const params: Record<string, string> = {}
 
-    Object.keys(inputs).map((key) => {
-      inputs[key].inputs.map((input) => {
-        if (input.type === "checkbox") {
-          if (input.checked) {
-            params[input.name] = input.label;
-          }
+    inputs.map((input) => {
+
+      if (input.type === "checkbox") {
+        if (input.checked) {
+          params[input.name] = input.label;
         }
-        else {
-          params[input.name] = input.value;
-        }
-      })
+      }
+      else {
+        params[input.name] = input.value;
+      }
+
     })
 
     console.log(params);
 
   }
 
-  // const IsDisabled = () => {
-  //   return inputs.some((input) => {
-  //     if (input.type === "checkbox") {
-  //       return input.required && !input.checked;
-  //     }
-  //     return input.required && !input.value;
-  //   })
-  // }
+  const IsDisabled = () => {
+    return inputs.some((input) => {
+      if (input.type === "checkbox") {
+        return input.required && !input.checked;
+      }
+      return input.required && !input.value;
+    })
+  }
 
-  // const disableSubmit = IsDisabled();
+  const disableSubmit = IsDisabled();
 
   return (
     <>
-      <FormWrapper
-        inputs={inputs}
-        onInputChange={onInputChange}
-        onHandleCancel={onHandleCancel}
-        onHandleSubmit={onHandleSubmit}
-        // disableSubmit={disableSubmit}
-        onInputBlur={onInputBlur} />
+      <FormWrapper inputs={inputs} onInputChange={onInputChange} onHandleCancel={onHandleCancel} onHandleSubmit={onHandleSubmit} disableSubmit={disableSubmit} onInputBlur={onInputBlur} />
     </>
   )
 }

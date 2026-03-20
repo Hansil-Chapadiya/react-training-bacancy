@@ -11,14 +11,15 @@ const DropDownField = ({
     onBlur,
     options,
     error,
+    categorykey
 }: Props) => {
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        onChange({ id, value: event.target.value })
+        onChange({ id, value: event.target.value, categorykey })
     }
 
     const handleBlur = (event: React.FocusEvent<HTMLSelectElement>) => {
-        onBlur({ id, value: event.target.value })
+        onBlur({ id, value: event.target.value, categorykey })
     }
 
     return (
