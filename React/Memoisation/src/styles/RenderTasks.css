@@ -1,8 +1,76 @@
-.taskItem {
+/* .taskItem {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     border: 2px solid white;
     margin-top: 5px;
+} */
+
+/* Container */
+.taskContainer {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+/* Task Item */
+.taskItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    padding: 12px;
+    margin-bottom: 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Left section */
+.taskContent {
+    flex: 1;
+}
+
+/* Completed style */
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Delete button */
+.deleteBtn {
+    background-color: #ff4d4f;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Hover */
+.deleteBtn:hover {
+    background-color: #d9363e;
+}
+
+/* Clear button */
+.clearBtn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.clearBtn:hover {
+    background-color: #333;
 }
