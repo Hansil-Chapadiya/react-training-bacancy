@@ -58,7 +58,6 @@ export const useProducts = () => {
 
         localStorage.setItem("products", JSON.stringify(updated));
 
-        // 🔥 remove from UI
         setData((prev) => prev.filter((item) => item.id !== id));
     };
 

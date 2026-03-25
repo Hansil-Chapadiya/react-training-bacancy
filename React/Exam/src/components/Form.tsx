@@ -9,7 +9,6 @@ const Form = ({ category, onSubmit }: ProductItemProp) => {
         formState: { errors },
     } = useForm();
 
-    // 🔥 inject category dynamically
     const updatedConfig = productFormConfig.map((field) =>
         field.name === "category"
             ? { ...field, options: category }
@@ -25,7 +24,6 @@ const Form = ({ category, onSubmit }: ProductItemProp) => {
                     <div key={input.id} style={{ marginBottom: "10px" }}>
                         <label>{input.label}</label>
 
-                        {/* 🔥 TEXTAREA */}
                         {input.type === "textarea" && (
                             <textarea
                                 {...register(input.name, { required: input.required })}
@@ -33,7 +31,6 @@ const Form = ({ category, onSubmit }: ProductItemProp) => {
                             />
                         )}
 
-                        {/* 🔥 SELECT */}
                         {input.type === "select" && (
                             <select {...register(input.name)}>
                                 <option value="">Select category</option>
@@ -45,7 +42,6 @@ const Form = ({ category, onSubmit }: ProductItemProp) => {
                             </select>
                         )}
 
-                        {/* 🔥 INPUT */}
                         {input.type !== "textarea" && input.type !== "select" && (
                             <input
                                 type={input.type}
@@ -55,7 +51,6 @@ const Form = ({ category, onSubmit }: ProductItemProp) => {
                             />
                         )}
 
-                        {/* 🔥 ERROR */}
                         {errors[input.name] && (
                             <p style={{ color: "red" }}>
                                 {input.label} is required
