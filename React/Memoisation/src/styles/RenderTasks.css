@@ -1,0 +1,8 @@
+.taskItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid white;
+    margin-top: 5px;
+}
