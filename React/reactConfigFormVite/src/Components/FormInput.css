@@ -1,0 +1,44 @@
+.input-field {
+    margin: 10px 0px;
+    padding: 15px;
+}
+
+/* Common button styles */
+.btn {
+    padding: 10px 18px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Submit button */
+.btn-submit {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-submit:hover {
+    cursor: pointer;
+    background-color: #45a049;
+}
+
+.btn-disable:hover {
+    cursor: not-allowed;
+    background-color: #45a049;
+}
+
+/* Cancel button */
+.btn-cancel {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background-color: #d73833;
+}
+
+/* Optional: spacing between buttons */
+.btn+.btn {
+    margin-left: 10px;
+}
